@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import SingleCard from './components/SingleCard';
 
 const cardImages = [
   { "src": "img/react.png"},
@@ -13,6 +14,8 @@ const cardImages = [
 function App() {
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
+  const [choiceOne, setChoiceOne] = useState(null);
+  const [choiceTwo, setChoiceTwo] = useState(null);
 
   // shuffle cards
   const shuffeledCards = () => {
@@ -33,6 +36,15 @@ function App() {
       <button onClick={shuffeledCards} 
         >Start Game
         </button>
+
+        <div className="card-grid">
+          {cards.map(card => (
+            
+            <SingleCard key={card.id} card={card} />
+            
+          ))}
+
+        </div>
     </div>
   );
 }

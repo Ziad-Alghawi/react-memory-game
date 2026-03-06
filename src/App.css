@@ -19,3 +19,15 @@ button:hover {
   color: #fff;
 }
 
+img {
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
