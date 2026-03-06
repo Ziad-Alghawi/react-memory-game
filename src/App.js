@@ -3,12 +3,12 @@ import './App.css';
 import SingleCard from './components/SingleCard';
 
 const cardImages = [
-  { "src": "img/react.png"},
-  { "src": "img/js.png"},
-  { "src": "img/web.png"},
-  { "src": "img/developer.png"},
-  { "src": "img/ziad.png"},
-  { "src": "img/code.png"}
+  { "src": "img/react.png", matched: false },
+  { "src": "img/js.png", matched: false },
+  { "src": "img/web.png", matched: false },
+  { "src": "img/developer.png", matched: false },
+  { "src": "img/ziad.png", matched: false },
+  { "src": "img/code.png", matched: false }
 ];
 
 function App() {
@@ -33,31 +33,39 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   }
 
-  // reset choices & increase turn
-  const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setTurns(prevTurns => prevTurns + 1);
-  }
-
   // compare 2 selected cards
   useEffect(() => {
     // if we have both choices, then we compare them
     if (choiceOne && choiceTwo) {
 
       if (choiceOne.src === choiceTwo.src) {
-        console.log('those cards match');
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if(card.src === choiceOne.src) {
+              return {...card, matched: true}
+            }else {
+              return card;
+            }
+          })
+        })
+
         resetTurn();
       } else {
-        console.log('those cards do not match');
-        resetTurn();
+
+        setTimeout(() => resetTurn(), 1000);
       }
     }
 
   }, [choiceOne, choiceTwo]);
 
+  console.log(cards);
 
-
+    // reset choices & increase turn
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns(prevTurns => prevTurns + 1);
+  }
 
   return (
     <div className="App">
@@ -73,6 +81,7 @@ function App() {
               key={card.id}
               card={card} 
               handleChoice={handleChoice}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
             />
             
           ))}
