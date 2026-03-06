@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+const cardImages = [
+  { "src": "img/react.png"},
+  { "src": "img/js.png"},
+  { "src": "img/web.png"},
+  { "src": "img/developer.png"},
+  { "src": "img/ziad.png"},
+  { "src": "img/code.png"}
+];
+
 function App() {
+  const [cards, setCards] = useState([]);
+  const [turns, setTurns] = useState(0);
+
+  // shuffle cards
+  const shuffeledCards = () => {
+    // duplicate cards
+    const shuffeledCards = [...cardImages, ...cardImages]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random()  })); 
+
+      setCards(shuffeledCards);
+      setTurns(0);
+
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Magic Memory Game</h1>
+      <button onClick={shuffeledCards} 
+        >Start Game
+        </button>
     </div>
   );
 }
