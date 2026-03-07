@@ -1,21 +1,17 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import SingleCard from './components/SingleCard';
+import { cardImages } from '../data/cards';
 
-const cardImages = [
-  { "src": "img/react.png", matched: false },
-  { "src": "img/js.png", matched: false },
-  { "src": "img/web.png", matched: false },
-  { "src": "img/developer.png", matched: false },
-  { "src": "img/ziad.png", matched: false },
-  { "src": "img/code.png", matched: false }
-];
+export type CardType  = {
+  id: number
+  src: string
+  matched: boolean
+}
 
-function App() {
-  const [cards, setCards] = useState([]);
+export default function useMemoryGame() {
+  const [cards, setCards] = useState<CardType[]>([]);
   const [turns, setTurns] = useState(0);
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
+  const [choiceOne, setChoiceOne] = useState<CardType | null>(null);
+  const [choiceTwo, setChoiceTwo] = useState<CardType | null>(null);
   const [disabled, setDisabled] = useState(false);
 
   // shuffle cards
@@ -32,7 +28,7 @@ function App() {
   }
 
   // handle a card choice
-  const handleChoice = (card) => {
+  const handleChoice = (card: CardType) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   }
 
@@ -77,30 +73,7 @@ function App() {
     shuffeledCards();
   }, []);
 
-  return (
-    <div className="App">
-      <h1>Magic Memory Game</h1>
-      <button onClick={shuffeledCards} 
-        >Start Game
-        </button>
-
-        <div className="card-grid">
-          {cards.map(card => (
-            
-            <SingleCard 
-              key={card.id}
-              card={card} 
-              handleChoice={handleChoice}
-              flipped={card === choiceOne || card === choiceTwo || card.matched}
-              disabled={disabled}
-            />
-            
-          ))}
-
-        </div>
-        <p>Turns: {turns}</p>
-    </div>
-  );
+  return { cards, turns, choiceOne, choiceTwo, disabled, shuffeledCards, handleChoice 
+    
+  };
 }
-
-export default App;

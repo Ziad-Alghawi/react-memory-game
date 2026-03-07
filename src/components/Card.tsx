@@ -1,6 +1,14 @@
-import './SingleCard.css';
+import './Card.css';
+import type { CardType  } from "../hooks/useMemoryGame"
 
-export default function SingleCard({ card, handleChoice, flipped, disabled }) {
+type Props = {
+  card: CardType 
+  handleChoice: (card: CardType ) => void
+  flipped: boolean
+  disabled: boolean
+}
+
+export default function Card({ card, handleChoice, flipped, disabled }: Props) {
 
   const handleClick = () => {
     if(!disabled){
