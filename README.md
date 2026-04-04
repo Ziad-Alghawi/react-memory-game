@@ -49,7 +49,7 @@ src/
 
 This repository is configured for GitHub Pages deployment through the gh-pages branch.
 
-1. Make sure your repository is named `memory-game` under your GitHub account.
+1. Make sure your repository is named `react-memory-game` under your GitHub account.
 2. Push your latest code to the `main` branch.
 3. Run:
 
@@ -64,7 +64,7 @@ This repository is configured for GitHub Pages deployment through the gh-pages b
 
 Live URL:
 
-https://ziad-alghawi.github.io/memory-game
+https://ziad-alghawi.github.io/react-memory-game
 
 If you use a different repository name, update the `homepage` field in `package.json`.
 
