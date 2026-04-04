@@ -15,20 +15,24 @@ export default function useMemoryGame() {
   const [disabled, setDisabled] = useState(false);
 
   // shuffle cards
-  const shuffeledCards = () => {
+  const shuffleCards = () => {
     // duplicate cards
-    const shuffeledCards = [...cardImages, ...cardImages]
+    const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
-      .map((card) => ({ ...card, id: Math.random()  })); 
+      .map((card, index) => ({ ...card, id: index }));
 
       setChoiceOne(null);
       setChoiceTwo(null);
-      setCards(shuffeledCards);
+      setCards(shuffledCards);
       setTurns(0);
   }
 
   // handle a card choice
   const handleChoice = (card: CardType) => {
+    if (choiceOne?.id === card.id) {
+      return;
+    }
+
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   }
 
@@ -58,8 +62,6 @@ export default function useMemoryGame() {
 
   }, [choiceOne, choiceTwo]);
 
-  console.log(cards);
-
     // reset choices & increase turn
   const resetTurn = () => {
     setChoiceOne(null);
@@ -70,10 +72,8 @@ export default function useMemoryGame() {
 
     //start a new game automatically
   useEffect(() => {
-    shuffeledCards();
+    shuffleCards();
   }, []);
 
-  return { cards, turns, choiceOne, choiceTwo, disabled, shuffeledCards, handleChoice 
-    
-  };
+  return { cards, turns, choiceOne, choiceTwo, disabled, shuffleCards, handleChoice };
 }

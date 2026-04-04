@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <h1>Magic Memory Game</h1>
 
-      <button onClick={game.shuffeledCards} 
+      <button onClick={game.shuffleCards} 
         >Start Game
         </button>
 
