@@ -14,7 +14,7 @@ Frontend project built with React and TypeScript, designed to showcase practical
 
 - React
 - TypeScript
-- Create React App
+- Vite
 - CSS
 
 ## Architecture
@@ -40,9 +40,9 @@ src/
 
 ## Available Scripts
 
-- npm run build: production build
-- npm run test: watch mode
-- npm run test:ci: single-run CI mode
+- npm run dev: development server
+- npm run build: type check and production build into `build/`
+- npm run preview: serve the production build locally
 - npm run deploy: publish build to GitHub Pages
 
 ## Deployment (GitHub Pages)
